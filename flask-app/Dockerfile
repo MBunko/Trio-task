@@ -1,10 +1,8 @@
 #Use Python Image
 FROM python:3.7
 # Install apt dependencies
-RUN sudo apt update
-RUN apt-get install python3-pip 
 # Copy contents into image
-COPY trio-task/flask-app/. . 
+COPY . . 
 # run pip dependencies
 RUN pip install Flask
 RUN pip install flask_sqlalchemy
