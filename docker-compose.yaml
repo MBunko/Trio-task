@@ -1,8 +1,8 @@
 version: '3.8'
 services: 
-  flask-db:
+  mysql:
     container_name: mysql
-    image: triomysql:latest
+    image: mbunko/triomysql:latest
     build: ./db
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -12,7 +12,9 @@ services:
       target: /var/lib/mysql
   flask-app:
     container_name: flask-app
-    image: flask-app:latest
+    image: mbunko/flask-app:latest
+    deploy:
+      replicas: 4
     build: ./flask-app
   nginx:
     container_name: nginx
