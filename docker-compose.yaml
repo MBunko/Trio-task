@@ -1,22 +1,21 @@
-version: '3.7'
-volumes:
-  mysql:
+version: '3.8'
 services: 
-  mysql:
+  flask-db:
     container_name: mysql
+    image: triomysql:latest
     build: ./db
-    image: triomysql
     environment:
-      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: password
     volumes:
     - type: volume
-      source: mysql
+      source: triomysql
       target: /var/lib/mysql
   flask-app:
     container_name: flask-app
+    image: flask-app:latest
     build: ./flask-app
-    image: flask-app
   nginx:
+    container_name: nginx
     image: nginx:alpine
     ports:
     - target: 80
@@ -25,3 +24,5 @@ services:
     - type: bind
       source: ./nginx/nginx.conf
       target: /etc/nginx/nginx.conf
+volumes:
+  triomysql:
